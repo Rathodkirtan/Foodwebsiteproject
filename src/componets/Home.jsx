@@ -1,13 +1,16 @@
 import React from "react";
 import guyImg from "../assets/images/hero.png";
 import { ReactTyped } from "react-typed";
+import Item from "./Item";
+import Serve from "./Serve";
+import TastyTreat from "./TastyTreat";
 
 function Home() {
   return (
     <section>
       <div className="container">
-        <div className="row d-flex align-items-center">
-          <div className="col-6">
+        <div className="row d-flex align-items-center flex-wrap-reverse">
+          <div className="col-12 col-md-6">
             <div className="hero__content">
               <h5 className="mb-3 rocknroll-one-regular">
                 Easy way to
@@ -37,26 +40,29 @@ function Home() {
               </p>
               <button
                 type="button"
-                class="btn btn-danger rocknroll-one-regular"
+                className="btn btn-danger rocknroll-one-regular"
               >
                 Order now{" "}
               </button>
               <button
                 type="button"
-                class="btn btn-white border border-danger ms-5 rocknroll-one-regular"
+                className="btn btn-white border border-danger ms-5 rocknroll-one-regular"
               >
                 See all foods
               </button>
             </div>
           </div>
 
-          <div className="col-6">
+          <div className="col-12 col-md-6">
             <div className="hero__img">
-              <img src={guyImg} alt="delivery-guy" className="w-100" />
+              <img src={guyImg} alt="delivery-guy" className="w-100 zoom" />
             </div>
           </div>
         </div>
       </div>
+      <Item />
+      <Serve />
+      <TastyTreat />
     </section>
   );
 }

@@ -1,19 +1,23 @@
 import React from "react";
 import Navlogo from "../assets/images/reslogo.png";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
     <>
-      <nav>
-        <div className="container ">
-          <div className="row d-flex justify-content-between align-items-center">
+      <nav className=" position-sticky top-0 bg-white shadow-sm">
+        <div className="container">
+          <div className="row d-flex justify-content-between align-items-center ">
             <div className="col-4 pt-3 ">
-              <img
-                src={Navlogo}
-                alt="logo"
-                style={{ width: "20%" }}
-                className="ms-3"
-              />
+              <NavLink to="/">
+                <img
+                  src={Navlogo}
+                  alt="logo"
+                  style={{ width: "20%" }}
+                  className="ms-3"
+                />
+              </NavLink>
+
               <h5 style={{ fontWeight: "700" }}>Tasty Treat</h5>
             </div>
             <div className="col-4">
@@ -21,10 +25,35 @@ function Navbar() {
                 className="d-lg-flex list-unstyled justify-content-between d-none"
                 style={{ fontWeight: "500" }}
               >
-                <li>Home</li>
-                <li>Foods</li>
-                <li>Franchise Enquiry</li>
-                <li>Contact Us</li>
+                <li>
+                  <NavLink to="/" className="text-dark text-decoration-none">
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/food"
+                    className="text-dark text-decoration-none"
+                  >
+                    Foods
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/franchise"
+                    className="text-dark text-decoration-none"
+                  >
+                    Franchise Enquiry
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/contact"
+                    className="text-dark text-decoration-none"
+                  >
+                    Contact Us
+                  </NavLink>
+                </li>
               </ul>
             </div>
             <div className="col-4 d-flex justify-content-end align-items-center">
@@ -32,10 +61,12 @@ function Navbar() {
                 className="fa-solid fa-cart-shopping"
                 style={{ fontSize: "1.2rem" }}
               ></i>
-              <i
-                className="fa-solid fa-user ms-4"
-                style={{ fontSize: "1.2rem" }}
-              ></i>
+              <NavLink to="/login">
+                <i
+                  className="fa-solid fa-user ms-4 text-dark"
+                  style={{ fontSize: "1.2rem" }}
+                ></i>
+              </NavLink>
             </div>
           </div>
         </div>

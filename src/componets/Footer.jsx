@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-3 footer d-flex align-items-start">
+        <div className="col-12 col-md-3 footer d-flex align-items-start">
           <div className="footer__logo ">
             <img src={Logo} alt="logo" style={{ width: "18%" }} />
             <h5 className="rocknroll-one-regular">Tasty Treat</h5>
@@ -17,7 +17,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <div className="col-3 footer d-flex align-items-start">
+        <div className="col-12 col-md-3 footer d-flex align-items-start">
           <div>
             <h5 className="footer__title mb-3 rocknroll-one-regular">
               Delivery Time
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="col-3 footer d-flex align-items-start">
+        <div className="col-12 col-md-3 footer d-flex align-items-start">
           <div>
             <h5 className="footer__title mb-3 rocknroll-one-regular">
               Contact
@@ -46,7 +46,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="col-3 footer d-flex align-items-start flex-column">
+        <div className="col-12 col-md-3 footer d-flex align-items-start flex-column">
           <div>
             <h6 className="footer-title rocknroll-one-regular">Newsletter</h6>
             <p>Subscribe our newsletter</p>

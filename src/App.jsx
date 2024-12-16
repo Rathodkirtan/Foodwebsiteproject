@@ -1,24 +1,49 @@
-import { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.css';
-import Navbar from './componets/Navbar';
-import Home from './componets/Home';
-import Item from './componets/Item';
-import Footer from './componets/Footer';
-import Foodcartname from './componets/Foodcartname';
-import Serve from './componets/Serve';
+import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.css";
+import Home from "./componets/Home";
+import Contact from "./pages/Contact";
+import Food from "./pages/Food";
+import Franchise from "./pages/Franchise";
+import Login from "./pages/Login";
+import Applayout from "./pages/Applayout";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Applayout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/food",
+          element: <Food />,
+        },
+        {
+          path: "/franchise",
+          element: <Franchise />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+      ],
+    },
+  ]);
 
   return (
     <>
-      <Navbar/>
-      <Home/>
-      <Item/>
-      <Serve/>
-      <Footer/>
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
