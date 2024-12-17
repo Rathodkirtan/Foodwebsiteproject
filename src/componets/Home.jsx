@@ -4,6 +4,7 @@ import { ReactTyped } from "react-typed";
 import Item from "./Item";
 import Serve from "./Serve";
 import TastyTreat from "./TastyTreat";
+import Cart from "./Cart";
 
 function Home() {
   return (
@@ -62,6 +63,7 @@ function Home() {
       </div>
       <Item />
       <Serve />
+      <Cart/>
       <TastyTreat />
     </section>
   );

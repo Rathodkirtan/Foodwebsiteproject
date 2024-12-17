@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Navlogo from "../assets/images/reslogo.png";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
+  const [Toggle, setToggle] = useState(true);
   return (
     <>
-      <nav className=" position-sticky top-0 bg-white shadow-sm">
+      <nav className=" position-sticky top-0 bg-white shadow-sm z-2">
         <div className="container">
           <div className="row d-flex justify-content-between align-items-center ">
-            <div className="col-4 pt-3 ">
+            <div className="col-4 pt-3">
               <NavLink to="/">
                 <img
                   src={Navlogo}
                   alt="logo"
                   style={{ width: "20%" }}
-                  className="ms-3"
+                  className="ms-3 zoom"
                 />
               </NavLink>
 
@@ -67,6 +68,13 @@ function Navbar() {
                   style={{ fontSize: "1.2rem" }}
                 ></i>
               </NavLink>
+              <div onClick={() => setToggle(!Toggle)} className="d-block d-lg-none">
+                {Toggle ? (
+                  <i className="fa-solid fa-bars fs-5 ps-3"></i>
+                ) : (
+                  <i class="fa-solid fa-xmark fs-5 ps-3"></i>
+                )}
+              </div>
             </div>
           </div>
         </div>
