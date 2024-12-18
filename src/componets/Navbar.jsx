@@ -68,17 +68,55 @@ function Navbar() {
                   style={{ fontSize: "1.2rem" }}
                 ></i>
               </NavLink>
-              <div onClick={() => setToggle(!Toggle)} className="d-block d-lg-none">
+              <div
+                onClick={() => setToggle(!Toggle)}
+                className="d-block d-lg-none"
+              >
                 {Toggle ? (
                   <i className="fa-solid fa-bars fs-5 ps-3"></i>
                 ) : (
-                  <i class="fa-solid fa-xmark fs-5 ps-3"></i>
+                  <i className="fa-solid fa-xmark fs-5 ps-3"></i>
                 )}
               </div>
             </div>
           </div>
         </div>
       </nav>
+      <div className="container">
+        {Toggle ? (
+          ""
+        ) : (
+          <ul
+            className="d-lg-flex list-unstyled justify-content-center flex-column gap-4 bg-white position-relative z-4"
+            style={{ fontWeight: "500" }}
+            onClick={() => setToggle(!Toggle)}
+          >
+            <li>
+              <NavLink to="/" className="text-dark text-decoration-none">
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/food" className="text-dark text-decoration-none">
+                Foods
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/franchise"
+                className="text-dark text-decoration-none"
+              >
+                Franchise Enquiry
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact" className="text-dark text-decoration-none">
+                Contact Us
+              </NavLink>
+            </li>
+          </ul>
+        )}
+      </div>
     </>
   );
 }

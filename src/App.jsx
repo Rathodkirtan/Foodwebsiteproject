@@ -6,6 +6,7 @@ import Food from "./pages/Food";
 import Franchise from "./pages/Franchise";
 import Login from "./pages/Login";
 import Applayout from "./pages/Applayout";
+import Registration from "./pages/Registration";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -34,7 +35,10 @@ function App() {
         {
           path: "/contact",
           element: <Contact />,
-        },
+        },{
+          path:"/registration",
+          element:<Registration/>
+        }
       ],
     },
   ]);
