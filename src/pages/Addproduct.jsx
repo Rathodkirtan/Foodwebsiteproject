@@ -1,27 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import Tree from "../assets/images/icon-carbon-neutral.svg";
+import { useLocation } from "react-router-dom";
+import Cartimg from './Cartimg'
 
 function Addproduct() {
+  const location = useLocation();
+  const [cart, setcart] = useState(location.state);
+
+  const handleDelete = (id) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setcart(updatedCart);
+  };
+
+  const orderTotal = cart.reduce(
+    (accumulator, item) => accumulator + item.price * item.quantity,
+    0
+  );
   return (
     <>
-      <div className="container-fluid d-flex justify-content-between align-items-center" >
-        <div className="AddCart" >
-          <h6>Pizza</h6>
-          <div className="price d-flex">
-            <p>4 x</p>
-            <p className="ps-2">@200</p>
-            <p className="ps-2">= 800</p>
+    {
+      cart.length==0 && <Cartimg/>
+    }
+
+    <div>
+      <h1 className="red rocknroll-one-regular text-center mt-3">Add To Cart</h1>
+    </div>
+      {cart.map((item, index) => {
+        return (
+          <div
+            className="container-fluid d-flex justify-content-between align-items-center"
+            key={index}
+          >
+            <div className="AddCart">
+              <h6>{item.name}</h6>
+              <div className="price d-flex">
+                <p>{item.quantity} x</p>
+                <p className="ps-2">@{item.price}</p>
+                <p className="ps-2">={item.quantity * item.price}</p>
+              </div>
+            </div>
+            <i
+              className="fa-solid fa-xmark pb-3 rounded-circle"
+              onClick={() => handleDelete(item.id)}
+              style={{ cursor: "pointer" }}
+            ></i>
           </div>
-        </div>
-        <i
-          className="fa-solid fa-xmark pb-3 rounded-circle"
-          // onClick={() => onDelete(item.id, item)}
-          style={{ cursor: "pointer" }}
-        ></i>
-      </div>
+        );
+      })}
+
       <div className="total d-flex justify-content-between p-2">
         <p>Order Total</p>
-        <h3>800</h3>
+        <h3>{orderTotal}</h3>
       </div>
 
       <div

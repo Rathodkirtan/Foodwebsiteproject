@@ -3,6 +3,7 @@ import Icon from "../assets/images/icon-add-to-cart.svg";
 import Increase from "../assets/images/icon-increment-quantity.svg";
 import Decrease from "../assets/images/icon-decrement-quantity.svg";
 import Data from "../../data.json";
+import { NavLink } from "react-router-dom";
 
 function Cart() {
   const [AddCart, setAddCart] = useState([]);
@@ -25,11 +26,6 @@ function Cart() {
     }
   };
 
-  const handleDelete = (id) => {
-    const updatedCart = AddCart.filter((item) => item.id !== id);
-    setAddCart(updatedCart);
-  };
-
   const updateQuantity = (id, amount) => {
     setAddCart(
       AddCart.map((item) =>
@@ -40,11 +36,16 @@ function Cart() {
     );
   };
 
-  console.log(AddCart);
+  // console.log(AddCart);
 
   return (
     <div className="container">
       <div className="row d-flex flex-wrap">
+        <span className="rounded-circle d-flex justify-content-end position-sticky top-50 end-0 z-1 mb-5">
+          <NavLink to="/Addproduct" state={AddCart}>
+            <i className="fa-solid fa-cart-shopping fs-2 mt-3 border p-3 rounded-circle text-dark zoom"></i>
+          </NavLink>
+        </span>
         <div className="col-12 mt-5">
           <h3 className="text-center rocknroll-one-regular fs-1 mb-5">
             Popular Foods
@@ -81,8 +82,10 @@ function Cart() {
                           className="pe-3"
                           onClick={() => updateQuantity(productItem.id, 1)}
                         />
+
                         {AddCart.find((item) => item.id === productItem.id)
                           ?.quantity || 1}
+
                         <img
                           src={Decrease}
                           alt="Decrease"
