@@ -5,7 +5,7 @@ import Cartimg from './Cartimg'
 
 function Addproduct() {
   const location = useLocation();
-  const [cart, setcart] = useState(location.state);
+  const [cart, setcart] = useState(location.state || []);
 
   const handleDelete = (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
