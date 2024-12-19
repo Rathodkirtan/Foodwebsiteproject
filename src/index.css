@@ -30,3 +30,7 @@
 .zoom:hover{
   transform: scale(1.15);
 }
+
+.active{
+  color: red;
+}

@@ -7,6 +7,7 @@ import Franchise from "./pages/Franchise";
 import Login from "./pages/Login";
 import Applayout from "./pages/Applayout";
 import Registration from "./pages/Registration";
+import Addproduct from "./pages/Addproduct";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -38,6 +39,9 @@ function App() {
         },{
           path:"/registration",
           element:<Registration/>
+        },{
+          path:"/Addproduct",
+          element:<Addproduct/>
         }
       ],
     },

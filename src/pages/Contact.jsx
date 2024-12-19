@@ -2,7 +2,7 @@ import React from "react";
 
 function Contact() {
   return (
-    <div className="mt-5 text-center container mb-5">
+    <div className="mt-5 text-center container mb-5 ">
       <h4 className="rocknroll-one-regular red">Contact Us</h4>
       {/* <div id="form-status" className="form-submit-success mt-2"></div> */}
       <form className="row site-forms mt-5 mb-0" id="contact_form">

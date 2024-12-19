@@ -58,10 +58,12 @@ function Navbar() {
               </ul>
             </div>
             <div className="col-4 d-flex justify-content-end align-items-center">
-              <i
-                className="fa-solid fa-cart-shopping"
-                style={{ fontSize: "1.2rem" }}
-              ></i>
+              <NavLink to='/Addproduct'>
+                <i
+                  className="fa-solid fa-cart-shopping text-dark"
+                  style={{ fontSize: "1.2rem" }}
+                ></i>
+              </NavLink>
               <NavLink to="/login">
                 <i
                   className="fa-solid fa-user ms-4 text-dark"
