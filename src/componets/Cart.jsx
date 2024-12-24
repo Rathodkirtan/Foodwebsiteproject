@@ -43,7 +43,7 @@ function Cart() {
       <div className="row d-flex flex-wrap">
         <span className="rounded-circle d-flex justify-content-end position-sticky top-50 end-0 z-1 mb-5">
           <NavLink to="/Addproduct" state={AddCart}>
-            <i className="fa-solid fa-cart-shopping fs-2 mt-3 border p-3 rounded-circle text-dark zoom"></i>
+            <i className="fa-solid fa-cart-shopping fs-2 mt-3 border p-3 rounded-circle text-dark zoom red"></i>
           </NavLink>
         </span>
         <div className="col-12 mt-5">
