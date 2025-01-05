@@ -64,12 +64,14 @@ function Navbar() {
                   style={{ fontSize: "1.2rem" }}
                 ></i>
               </NavLink>
-              <NavLink to="/login">
+              {
+                false?<button className="bn" style={{border:"2px solid red",marginLeft:"10px",background:"white",borderRadius:"5px"}}>logout</button>:<NavLink to="/login">
                 <i
                   className="fa-solid fa-user ms-4 text-dark"
                   style={{ fontSize: "1.2rem" }}
                 ></i>
               </NavLink>
+              }
               <div
                 onClick={() => setToggle(!Toggle)}
                 className="d-block d-lg-none"

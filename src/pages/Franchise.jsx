@@ -1,6 +1,24 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Franchise() {
+  const [franchise, setfranchise] = useState({});
+  const navigate=useNavigate();
+
+  const changehandle=(e)=>{
+    setfranchise({...franchise,[e.target.name]:e.target.value})
+  }
+
+  const franchisehandler=(e)=>{
+    e.preventDefault();
+    axios.post('http://localhost:8000/api/francise',franchise).then((res)=>{
+      console.log(res.data);
+      navigate('/')
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   return (
     <>
       <div className="container">
@@ -44,6 +62,8 @@ function Franchise() {
                     placeholder="Name"
                     id="first_name"
                     className="form-control mb-4"
+                    name="name"
+                    onChange={changehandle}
                     required
                   />
                 </div>
@@ -55,6 +75,9 @@ function Franchise() {
                     placeholder="Last Name"
                     id="last_name"
                     className="form-control mb-4"
+                    name="lastname"
+                    onChange={changehandle}
+
                     required
                   />
                 </div>
@@ -66,7 +89,10 @@ function Franchise() {
                     placeholder="City"
                     id="contact_no"
                     className="form-control mb-4"
+                    name="city"
                     pattern="/^[0-9]{10}$/g"
+                    onChange={changehandle}
+
                     required
                   />
                 </div>
@@ -77,7 +103,10 @@ function Franchise() {
                     type="text"
                     placeholder="Contact Number"
                     id="email_id"
+                    name="contact"
                     className="form-control mb-4"
+                    onChange={changehandle}
+
                     required
                   />
                 </div>
@@ -88,7 +117,10 @@ function Franchise() {
                     type="text"
                     placeholder="Email id"
                     id="email_id"
+                    name="email"
                     className="form-control mb-4"
+                    onChange={changehandle}
+
                     required
                   />
                 </div>
@@ -99,6 +131,9 @@ function Franchise() {
                     className="form-control mb-4"
                     id="message"
                     placeholder="Write your messages.."
+                    name="content"
+                    onChange={changehandle}
+
                     required
                     rows={5}
                   ></textarea>
@@ -109,6 +144,7 @@ function Franchise() {
                   <button
                     name="submit"
                     className="btnAction btn btn-danger rounded-pill"
+                    onClick={franchisehandler}
                   >
                     Send Message
                   </button>

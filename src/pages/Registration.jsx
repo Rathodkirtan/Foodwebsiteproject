@@ -1,26 +1,30 @@
 import React, { useState } from "react";
 import styles from "../style/Login.module.css";
 import { NavLink } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Registration() {
-  const [form, setform] = useState({
-    fullname: "",
-    email: "",
-    password: "",
-  });
+  const [form, setform] = useState({});
+  const navigate = useNavigate();
 
-  const changehandle=(e)=>{
-    setform({...form,[e.target.name]:e.target.value});
-  }
+  const changehandle = (e) => {
+    setform({ ...form, [e.target.name]: e.target.value });
+  };
 
-  const sendhandler=async(e)=>{
-    await axios.post('http://localhost:8000/reg',form).then((res)=>{
-      console.log(res.data());
-    }).catch((err)=>{
-      console.log(err);
-    })
-  }
+  const sendhandler = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://localhost:8000/reg", form)
+      .then((res) => {
+        console.log(res.data.token);
+        // document.cookie = `Token=${res.data.token}`;
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="container-fluid mb-3">
       <div className="row w-100">
@@ -31,7 +35,11 @@ function Registration() {
         </div>
 
         <div className="m-auto text-center col-12 ">
-          <form className="form mb-5 mt-5 light-red" action="http://localhost:8000/reg" method="post">
+          <form
+            className="form mb-5 mt-5 light-red"
+            action="http://localhost:8000/reg"
+            method="post"
+          >
             <div className="form__group ">
               <input
                 type="text"
@@ -63,7 +71,7 @@ function Registration() {
               />
             </div>
             <button
-              type="btn"
+              type="submit"
               className="addTOCart__btn btn btn-danger rouded mt-3 mb-0 text-white px-4"
               onClick={sendhandler}
             >
