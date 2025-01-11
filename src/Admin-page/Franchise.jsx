@@ -1,143 +1,74 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 function Franchise() {
+  const [data, setdata] = useState([]);
+
+  useEffect(() => {
+    const getfranchise = async () => {
+      await axios
+        .get("http://localhost:8000/api/admin/franchise")
+        .then((data) => {
+          setdata(data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getfranchise();
+  }, []);
+  const deletefranchise = async (id) => {
+    await axios
+      .get(`http://localhost:8000/api/francisedelete/${id}`)
+      .then((res) => {
+        setdata(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <table className="table ">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">City</th>
-        <th scope="col">Contact Name</th>
-        <th scope="col">Email id</th>
-        <th scope="col">Message</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">5</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">6</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">7</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">8</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">9</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-      <tr>
-        <th scope="row">10</th>
-        <td>kirtan</td>
-        <td>Rathod</td>
-        <td>Botad</td>
-
-        <td>9978033082</td>
-        <td>kirtan12082004@gmail.com</td>
-        <td>hello i give contact number </td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-    </tbody>
-  </table>
-  )
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">City</th>
+          <th scope="col">Contact Name</th>
+          <th scope="col">Email id</th>
+          <th scope="col">Message</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((dt, index) => {
+          return (
+            <tr>
+              <th scope="row">{index + 1}</th>
+              <td>{dt.name}</td>
+              <td>{dt.lastname}</td>
+              <td>{dt.city}</td>
+              <td>{dt.contact}</td>
+              <td>{dt.email}</td>
+              <td>{dt.content}</td>
+              <td style={{ cursor: "pointer" }}>
+                <NavLink to="/admin/franchiseEdit" state={dt}>Edit</NavLink>
+              </td>
+              <td
+                onClick={() => deletefranchise(dt._id)}
+                style={{ cursor: "pointer" }}
+              >
+                Delete
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
 }
 
-export default Franchise
+export default Franchise;

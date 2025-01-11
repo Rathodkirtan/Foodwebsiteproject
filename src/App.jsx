@@ -18,6 +18,9 @@ import Order from "./Admin-page/Order";
 import Layout from "./Admin-page/layout.jsx";
 import Franchi from "./Admin-page/Franchise.jsx";
 import Contactus from "./Admin-page/Contact.jsx";
+import FranchiseEdit from "./Admin-page/franchiseEdit.jsx";
+import ContactEdit from "./Admin-page/ContactEdit.jsx";
+import UserEdit from "./Admin-page/UserEdit.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -81,6 +84,15 @@ function App() {
         },{
           path:"/admin/order",
           element:<Order/>
+        },{
+          path:"/admin/franchiseEdit",
+          element:<FranchiseEdit/>
+        },{
+          path:"/admin/contactEdit",
+          element:<ContactEdit/>
+        },{
+          path:"/admin/userEdit",
+          element:<UserEdit/>
         }
       ]
     },

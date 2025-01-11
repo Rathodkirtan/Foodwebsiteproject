@@ -39,6 +39,7 @@ function Registration() {
             className="form mb-5 mt-5 light-red"
             action="http://localhost:8000/reg"
             method="post"
+            onSubmit={sendhandler}
           >
             <div className="form__group ">
               <input
@@ -60,6 +61,26 @@ function Registration() {
                 required
               />
             </div>
+            <div className="form__group ">
+              <input
+                type="number"
+                placeholder="Contact number"
+                className=""
+                name="contact"
+                onChange={changehandle}
+                required
+              />
+            </div>
+            <div className="form__group ">
+              <textarea
+                placeholder="Address..."
+                className="m-3"
+                name="address"
+                onChange={changehandle}
+                required
+                style={{width:"15.5%"}}
+              ></textarea>
+            </div>
             <div className="form__group">
               <input
                 type="password"
@@ -73,7 +94,6 @@ function Registration() {
             <button
               type="submit"
               className="addTOCart__btn btn btn-danger rouded mt-3 mb-0 text-white px-4"
-              onClick={sendhandler}
             >
               Sign up
             </button>

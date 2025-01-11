@@ -1,124 +1,68 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 function Contact() {
+  const [res, setres] = useState([]);
+
+  useEffect(() => {
+    const contactfun = async () => {
+      await axios
+        .get("http://localhost:8000/api/admin/contact")
+        .then((data) => {
+          setres(data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    contactfun();
+  }, []);
+
+  const deletecontact = async (id) => {
+    await axios
+      .get(`http://localhost:8000/api/contactdelete/${id}`)
+      .then((res) => {
+        setres(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <table className="table ">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Contact Name</th>
-            <th scope="col">Email id</th>
-            <th scope="col">Message</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">7</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">8</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">9</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number</td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-          <tr>
-            <th scope="row">10</th>
-            <td>kirtan</td>
-            <td>Rathod</td>
-            <td>9978033082</td>
-            <td>kirtan12082004@gmail.com</td>
-            <td>hello i give contact number </td>
-            <td>Edit</td>
-            <td>Delete</td>
-          </tr>
-        </tbody>
-      </table>
-  )
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Contact Name</th>
+          <th scope="col">Email id</th>
+          <th scope="col">Message</th>
+          <th scope="col">Edit</th>
+          <th scope="col" >Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {res.map((dt, index) => {
+          return (
+            <tr key={index}>
+              <th scope="row">{index + 1}</th>
+              <td>{dt.name}</td>
+              <td>{dt.lastname}</td>
+              <td>{dt.contact}</td>
+              <td>{dt.email}</td>
+              <td>{dt.content}</td>
+              <td>
+                <NavLink to="/admin/contactEdit" state={dt}>Edit</NavLink>
+              </td>
+              <td onClick={()=>deletecontact(dt._id)} style={{cursor:"pointer"}}>Delete</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
 }
 
-export default Contact
+export default Contact;

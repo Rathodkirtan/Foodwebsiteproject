@@ -97,7 +97,7 @@ const SideBar = ({ children }) => {
               damping: 10,
             },
           }}
-          className={`sidebar `}
+          className={`sidebar position-sticky top-0`}
         >
           <div className="top_section">
             <AnimatePresence>

@@ -30,6 +30,7 @@ function Contact() {
       <form
         className="row site-forms mt-5 mb-0"
         id="contact_form"
+        onSubmit={contacthandler}
         action="localhost:8000/api/contact"
         method="post"
       >
@@ -66,7 +67,6 @@ function Contact() {
               placeholder="Contact Number"
               id="contact_no"
               className="form-control mb-4"
-              pattern="/^[0-9]{10}$/g"
               onChange={changehandler}
               name="contact"
               required
@@ -95,17 +95,18 @@ function Contact() {
               placeholder="Write your messages.."
               onChange={changehandler}
               name="content"
-              required
               rows={5}
+              required
             ></textarea>
           </div>
         </div>
         <div className="col-12">
           <div className="form-group text-center">
             <button
+              type="submit"
               name="submit"
               className="btnAction btn btn-danger"
-              onClick={contacthandler}
+              // onClick={contacthandler}
             >
               Submit
             </button>

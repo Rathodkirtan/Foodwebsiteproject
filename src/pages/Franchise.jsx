@@ -50,7 +50,7 @@ function Franchise() {
           </div>
 
           <div className="col-12 col-lg-6">
-            <form className="row site-forms mt-5 mb-0" id="contact_form">
+            <form className="row site-forms mt-5 mb-0" id="contact_form" onSubmit={franchisehandler} action="localhost:8000/api/francise" method="post">
               <h4 className="rocknroll-one-regular red mb-4">
                 Share Your Details
               </h4>
@@ -90,7 +90,7 @@ function Franchise() {
                     id="contact_no"
                     className="form-control mb-4"
                     name="city"
-                    pattern="/^[0-9]{10}$/g"
+                    
                     onChange={changehandle}
 
                     required
@@ -142,9 +142,10 @@ function Franchise() {
               <div className="col-12 mb-3">
                 <div className="form-group text-center">
                   <button
+                  type="submit"
                     name="submit"
                     className="btnAction btn btn-danger rounded-pill"
-                    onClick={franchisehandler}
+               
                   >
                     Send Message
                   </button>
