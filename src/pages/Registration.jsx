@@ -14,16 +14,21 @@ function Registration() {
 
   const sendhandler = async (e) => {
     e.preventDefault();
-    await axios
+    try {
+      await axios
       .post("http://localhost:8000/reg", form)
       .then((res) => {
         console.log(res.data.token);
-        // document.cookie = `Token=${res.data.token}`;
+        localStorage.setItem("token", res.data.token);
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
       });
+    } catch (error) {
+      console.log(error)
+    }
+   
   };
   return (
     <div className="container-fluid mb-3">
@@ -39,7 +44,6 @@ function Registration() {
             className="form mb-5 mt-5 light-red"
             action="http://localhost:8000/reg"
             method="post"
-            onSubmit={sendhandler}
           >
             <div className="form__group ">
               <input
@@ -92,8 +96,9 @@ function Registration() {
               />
             </div>
             <button
-              type="submit"
+              // type=""
               className="addTOCart__btn btn btn-danger rouded mt-3 mb-0 text-white px-4"
+              onClick={sendhandler}
             >
               Sign up
             </button>

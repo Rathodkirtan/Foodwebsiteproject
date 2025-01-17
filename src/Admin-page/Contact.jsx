@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 function Contact() {
   const [res, setres] = useState([]);
+  
 
   useEffect(() => {
     const contactfun = async () => {
       await axios
-        .get("http://localhost:8000/api/admin/contact")
+        .get("http://localhost:8000/api/admin/contact", {
+          headers: {
+            authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpcmVuQGdtYWlsLmNvbSIsImlhdCI6MTczNzA4MzE3Nn0.YYUeZ7psTbfrlKacR2CHoAUWg24y2vLcjtGa9eT0fdY",
+          },
+        })
         .then((data) => {
           setres(data.data);
         })
@@ -40,7 +46,7 @@ function Contact() {
           <th scope="col">Email id</th>
           <th scope="col">Message</th>
           <th scope="col">Edit</th>
-          <th scope="col" >Delete</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -54,9 +60,16 @@ function Contact() {
               <td>{dt.email}</td>
               <td>{dt.content}</td>
               <td>
-                <NavLink to="/admin/contactEdit" state={dt}>Edit</NavLink>
+                <NavLink to="/admin/contactEdit" state={dt}>
+                  Edit
+                </NavLink>
               </td>
-              <td onClick={()=>deletecontact(dt._id)} style={{cursor:"pointer"}}>Delete</td>
+              <td
+                onClick={() => deletecontact(dt._id)}
+                style={{ cursor: "pointer" }}
+              >
+                Delete
+              </td>
             </tr>
           );
         })}

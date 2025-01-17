@@ -1,27 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "../assets/images/icon-add-to-cart.svg";
 import Increase from "../assets/images/icon-increment-quantity.svg";
 import Decrease from "../assets/images/icon-decrement-quantity.svg";
 import Data from "../../data.json";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 function Cart() {
   const [AddCart, setAddCart] = useState([]);
 
+  const [data, setdata] = useState([]);
+  useEffect(() => {
+    const getcartitem = async () => {
+      await axios
+        .get("http://localhost:8000/api/getitem")
+        .then((res) => {
+          setdata(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getcartitem();
+  }, []);
+
   const addList = (productItem) => {
-    const existingItem = AddCart.find((item) => item.id === productItem.id);
+    const existingItem = AddCart.find((item) => item._id === productItem._id);
 
     if (existingItem) {
-      // If the product already exists in the cart, increase its quantity
       setAddCart(
         AddCart.map((item) =>
-          item.id === productItem.id
+          item._id === productItem._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
       );
     } else {
-      // Add the product to the cart with quantity initialized to 1
       setAddCart([...AddCart, { ...productItem, quantity: 1, isValid: true }]);
     }
   };
@@ -29,14 +43,13 @@ function Cart() {
   const updateQuantity = (id, amount) => {
     setAddCart(
       AddCart.map((item) =>
-        item.id === id
+        item._id === id
           ? { ...item, quantity: Math.max(1, item.quantity + amount) }
           : item
       )
     );
   };
 
-  // console.log(AddCart);
 
   return (
     <div className="container">
@@ -51,17 +64,20 @@ function Cart() {
             Popular Foods
           </h3>
           <div className="d-flex flex-wrap justify-content-center justify-content-md-between ">
-            {Data.map((productItem) => {
+            {data.map((productItem,index) => {
               return (
-                <div className="cart" key={productItem.id}>
+                <div className="cart" key={index}>
                   <img
-                    src={productItem.image.mobile}
+                    src={
+                      "http://localhost:8000/uploads/" +
+                      productItem.image.moblie
+                    }
                     alt="img"
                     style={{ width: "240px" }}
                     className="rounded zoom"
                   />
                   <div className="cart-body">
-                    {AddCart.some((item) => item.id === productItem.id) ? (
+                    {AddCart.some((item) => item._id === productItem._id) ? (
                       <div
                         style={{
                           background: "hsl(14, 86%, 42%)",
@@ -80,17 +96,17 @@ function Cart() {
                           src={Increase}
                           alt="Increase"
                           className="pe-3"
-                          onClick={() => updateQuantity(productItem.id, 1)}
+                          onClick={() => updateQuantity(productItem._id, 1)}
                         />
 
-                        {AddCart.find((item) => item.id === productItem.id)
+                        {AddCart.find((item) => item._id === productItem._id)
                           ?.quantity || 1}
 
                         <img
                           src={Decrease}
                           alt="Decrease"
                           className="ps-3"
-                          onClick={() => updateQuantity(productItem.id, -1)}
+                          onClick={() => updateQuantity(productItem._id, -1)}
                         />
                       </div>
                     ) : (

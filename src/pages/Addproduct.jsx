@@ -8,7 +8,7 @@ function Addproduct() {
   const [cart, setcart] = useState(location.state || []);
 
   const handleDelete = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
+    const updatedCart = cart.filter((item) => item._id !== id);
     setcart(updatedCart);
   };
 
@@ -41,7 +41,7 @@ function Addproduct() {
             </div>
             <i
               className="fa-solid fa-xmark pb-3 rounded-circle"
-              onClick={() => handleDelete(item.id)}
+              onClick={() => handleDelete(item._id)}
               style={{ cursor: "pointer" }}
             ></i>
           </div>

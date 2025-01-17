@@ -21,6 +21,9 @@ import Contactus from "./Admin-page/Contact.jsx";
 import FranchiseEdit from "./Admin-page/franchiseEdit.jsx";
 import ContactEdit from "./Admin-page/ContactEdit.jsx";
 import UserEdit from "./Admin-page/UserEdit.jsx";
+import Addcategories from "./Admin-page/Addcategories.jsx";
+import Categoriesedit from "./Admin-page/Categoriesedit.jsx";
+import AdminLogin from "./Admin-page/AdminLogin.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -59,8 +62,12 @@ function App() {
       ],
     },
     {
+      path:'/admin',
+      element:<AdminLogin/>
+    },
+    {
       path: "/admin",
-      element: <Layout />,
+      element: <Layout/>,
       children:[
         {
           path:"/admin/dashbord",
@@ -93,6 +100,13 @@ function App() {
         },{
           path:"/admin/userEdit",
           element:<UserEdit/>
+        },{
+          path:"/admin/categoriesadd",
+          element:<Addcategories/>
+        },
+        {
+          path:"/admin/categoriesedit",
+          element:<Categoriesedit/>
         }
       ]
     },

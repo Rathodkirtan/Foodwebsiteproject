@@ -5,27 +5,36 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [form, serform] = useState({});
-  const navigate=useNavigate();
+  const [form, setForm] = useState({});
+  const navigate = useNavigate();
+
+  // Handle input changes
   const changelogin = (e) => {
-    // e.preventDefault();
-    serform({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission
   const sendlogin = async (e) => {
-    e.preventDefault();
-    await axios
-      .post("http://localhost:8000/login", form)
-      .then((res) => {
-        console.log(res.data)
-        // document.cookie=`Token=${res.data.token}`;
-        navigate('/')
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-     
+    e.preventDefault(); // Prevent default form submission
+    try {
+      const res = await axios.post("http://localhost:8000/login", form);
+      console.log("Response data:", res.data);
+
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+
+        // Redirect to home page
+        navigate("/");
+      } else {
+        console.error("Token not received");
+        alert("Login failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error during login:", err);
+      alert("Invalid login credentials. Please check your email and password.");
+    }
   };
+
   return (
     <>
       <div className="container-fluid mb-3">
@@ -33,20 +42,19 @@ function Login() {
           <div
             className={`${styles.img} d-flex align-items-center text-white fs-1 ps-4 col-12 rocknroll-one-regular`}
           >
-            login
+            Login
           </div>
 
-          <div className="m-auto text-center col-12 ">
+          <div className="m-auto text-center col-12">
             <form
               className="form mb-5 mt-5 light-red"
-              action="http://localhost:8000/login"
-              method="post"
+              onSubmit={sendlogin} // Bind sendlogin to the form submission
             >
-              <div className="form__group ">
+              <div className="form__group">
                 <input
                   type="email"
                   placeholder="Email"
-                  className=" m-4"
+                  className="m-4"
                   name="email"
                   onChange={changelogin}
                   required
@@ -56,16 +64,15 @@ function Login() {
                 <input
                   type="password"
                   placeholder="Password"
-                  required
                   name="password"
                   onChange={changelogin}
                   className=""
+                  required
                 />
               </div>
               <button
                 type="submit"
-                onClick={sendlogin}
-                className="addTOCart__btn btn btn-danger rouded mt-3 mb-0 text-white px-4"
+                className="addTOCart__btn btn btn-danger rounded mt-3 mb-0 text-white px-4"
               >
                 Login
               </button>
